@@ -11,9 +11,9 @@ pipeline {
                bat 'mvn test'
            }
         }
-        stage ('Unit Tests') {
+        stage ('Sonar Analysis') {
            steps {
-               bat 'mvn test'
+               bat 'echo teste'
            }
         }
     }
