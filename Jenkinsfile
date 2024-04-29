@@ -21,15 +21,17 @@ pipeline {
                 }  
            }
         }
-        stage ('Deply Backend') {
+        stage ('Deploy Backend') {
            steps {
                deploy adapters: [tomcat9(credentialsId: 'Tomcat', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
            }
         }
         stage ('API Test') {
            steps {
-               git credentialsId: 'GitHub', url: 'https://github.com/AlexandreFreitasCampos/tasks-api-test.git'
-               bat 'mvn test'
+                dir('api-test'){
+                    git credentialsId: 'GitHub', url: 'https://github.com/AlexandreFreitasCampos/tasks-api-test.git'
+                    bat 'mvn test'
+                }
            }
         }
     }
