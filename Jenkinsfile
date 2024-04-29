@@ -43,6 +43,14 @@ pipeline {
                 }
            }
         }
+        stage ('Functional Test') {
+           steps {
+                dir('functional-test'){
+                    git credentialsId: 'GitHub', url: 'https://github.com/AlexandreFreitasCampos/tasks-functional-tests.git'
+                    bat 'mvn test'
+                }
+           }
+        }
     }
 }
 
